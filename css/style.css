@@ -1,0 +1,806 @@
+/* ═══════════════════════════════════════════════════════════
+   CONFESSION PART 4 — style.css
+   Theme : sakura pink + cream, light and high-contrast
+   Fonts : Cormorant Garamond (title) · Caveat (handwriting) · Nunito (reading)
+═══════════════════════════════════════════════════════════ */
+
+:root {
+  --cream: #fffaf2; /* paper                         */
+  --cream-2: #fff1e4;
+  --blush: #ffe6ee; /* soft pink backgrounds         */
+  --sakura: #f7b6c8; /* petals / decorations          */
+  --sakura-m: #ec8fb0; /* book cover                    */
+  --rose: #bf4573; /* buttons (white text = 4.8:1)  */
+  --rose-d: #a33761;
+  --ink: #4a2733; /* main text on cream (≈ 11:1)   */
+  --muted: #7a5563; /* secondary text (≈ 6:1)        */
+  --line: #f0cfda;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 15% 10%, #ffe1ea 0, transparent 45%),
+    radial-gradient(circle at 90% 85%, #ffe9d8 0, transparent 45%),
+    linear-gradient(180deg, #fff5f8 0%, var(--cream) 100%);
+  background-attachment: fixed;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ── PETALS ──────────────────────────────────────────────── */
+.petals {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.petal {
+  position: absolute;
+  top: -20px;
+  border-radius: 70% 0 70% 0;
+  opacity: 0.85;
+  animation: petalFall linear forwards;
+}
+@keyframes petalFall {
+  0% {
+    transform: translate(0, -5vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate(var(--dx, 60px), 108vh) rotate(var(--rot, 300deg));
+    opacity: 0.6;
+  }
+}
+
+/* ── STAGE ───────────────────────────────────────────────── */
+.stage {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  padding: 36px 18px 80px;
+  min-height: 100vh;
+}
+.scene {
+  width: 100%;
+  max-width: 580px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: opacity 0.55s ease;
+}
+.scene.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.top-note {
+  font-family: "Caveat", cursive;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 22px;
+  transition: opacity 0.5s;
+}
+.top-note.hide {
+  opacity: 0;
+}
+
+/* ── PHOTO / MEME SLOTS ──────────────────────────────────── */
+.photo {
+  position: relative;
+  background: #fff;
+}
+.photo img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+}
+.photo figcaption {
+  font-family: "Caveat", cursive;
+  font-size: 1.15rem;
+  color: var(--muted);
+  text-align: center;
+}
+.photo .ph {
+  display: none;
+}
+
+.photo.missing img {
+  display: none;
+}
+.photo.missing .ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 130px;
+  border: 2px dashed var(--sakura-m);
+  color: var(--muted);
+  font-size: 0.85rem;
+  padding: 12px;
+  margin-bottom: 4px;
+}
+
+/* ── THE DIARY ───────────────────────────────────────────── */
+:root {
+  --bw: min(78vw, 320px);
+}
+
+.book-wrap {
+  perspective: 1400px;
+}
+
+.book {
+  position: relative;
+  width: var(--bw);
+  aspect-ratio: 3 / 4.1;
+  cursor: pointer;
+  outline-offset: 8px;
+  animation: bob 3.4s ease-in-out infinite;
+}
+.book.open {
+  animation: none;
+  cursor: default;
+}
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* inner page */
+.page {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--cream);
+  border-radius: 4px 10px 10px 4px;
+  padding: 20px 20px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  /* stacked page edges on the right */
+  box-shadow:
+    2px 0 0 #fff,
+    4px 0 0 #efd3dc,
+    6px 0 0 #fff,
+    8px 0 0 #e8c7d3,
+    0 14px 28px rgba(191, 69, 115, 0.22);
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent 0 27px,
+    rgba(236, 143, 176, 0.14) 27px 28px
+  );
+}
+.page-date {
+  font-family: "Caveat", cursive;
+  font-size: 1.15rem;
+  color: var(--muted);
+  align-self: flex-start;
+}
+.page-hello {
+  font-family: "Caveat", cursive;
+  font-size: 2rem;
+  font-weight: 700;
+  align-self: flex-start;
+  line-height: 1;
+}
+.page-small {
+  font-family: "Caveat", cursive;
+  font-size: 1.25rem;
+  color: var(--rose);
+  margin-top: auto;
+  text-align: center;
+}
+
+.paste {
+  width: 78%;
+  padding: 6px 6px 4px;
+  transform: rotate(-2.5deg);
+  box-shadow: 0 6px 14px rgba(74, 39, 51, 0.18);
+  margin-top: 6px;
+}
+.paste img {
+  aspect-ratio: 5 / 4;
+}
+.paste::before {
+  /* washi tape */
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 70px;
+  height: 20px;
+  transform: translateX(-50%) rotate(3deg);
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(247, 182, 200, 0.85) 0 6px,
+    rgba(255, 255, 255, 0.7) 6px 12px
+  );
+}
+
+/* cover */
+.book-cover {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  transform-origin: left center;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  background: linear-gradient(
+    145deg,
+    #f6a9c1 0%,
+    var(--sakura-m) 60%,
+    #e57fa4 100%
+  );
+  border-radius: 4px 12px 12px 4px;
+  box-shadow:
+    inset 8px 0 0 rgba(255, 255, 255, 0.25),
+    inset -2px 0 0 rgba(0, 0, 0, 0.06),
+    0 16px 34px rgba(191, 69, 115, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 1.2s cubic-bezier(0.5, 0, 0.2, 1);
+}
+.book.open .book-cover {
+  transform: rotateY(-100deg);
+}
+
+/* little dotted sakura pattern on the cover */
+.book-cover::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border: 2px dashed rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+}
+
+.cover-label {
+  position: relative;
+  width: 70%;
+  background: var(--cream);
+  border-radius: 6px;
+  padding: 20px 10px 16px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(74, 39, 51, 0.18);
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+}
+.cover-title {
+  grid-area: 1 / 1;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(1.35rem, 6.4vw, 1.75rem);
+  line-height: 1.1;
+  color: var(--ink);
+  transition: opacity 0.8s ease;
+}
+.cover-title.t-b {
+  opacity: 0;
+}
+.book.ended .cover-title.t-a {
+  opacity: 0;
+}
+.book.ended .cover-title.t-b {
+  opacity: 1;
+  font-size: clamp(1.8rem, 8vw, 2.3rem);
+}
+.cover-sub {
+  grid-row: 2;
+  font-family: "Caveat", cursive;
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+
+.cover-sticker {
+  position: absolute;
+  right: 10px;
+  bottom: 12px;
+  width: 26%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  transform: rotate(10deg);
+  box-shadow: 0 4px 10px rgba(74, 39, 51, 0.3);
+}
+
+.ribbon {
+  position: absolute;
+  z-index: 4;
+  left: 34px;
+  bottom: -22px;
+  width: 14px;
+  height: 40px;
+  background: var(--rose);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%);
+}
+
+/* ── LETTER THAT DROPS OUT ───────────────────────────────── */
+.drop-zone {
+  position: relative;
+  z-index: 6;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 190px;
+  margin-top: 34px;
+}
+.letter {
+  position: relative;
+  width: 210px;
+  height: 128px;
+  cursor: pointer;
+  background: #fff;
+  border: 2px solid var(--sakura);
+  border-radius: 6px;
+  box-shadow: 0 10px 22px rgba(191, 69, 115, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+}
+/* envelope fold lines */
+.letter::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  background:
+    linear-gradient(
+        to bottom right,
+        transparent 49.2%,
+        var(--line) 49.5% 50.5%,
+        transparent 50.8%
+      )
+      top left / 50% 100% no-repeat,
+    linear-gradient(
+        to bottom left,
+        transparent 49.2%,
+        var(--line) 49.5% 50.5%,
+        transparent 50.8%
+      )
+      top right / 50% 100% no-repeat;
+}
+.letter-to {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 12px;
+  text-align: center;
+  font-family: "Caveat", cursive;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.letter-seal {
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  transform: translate(-50%, -62%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--rose);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+}
+.letter.dropped {
+  animation: letterFall 1.4s cubic-bezier(0.3, 0.7, 0.4, 1) forwards;
+  pointer-events: auto;
+}
+.letter.ready {
+  transition: box-shadow 0.2s;
+}
+.letter.ready:hover {
+  box-shadow: 0 16px 30px rgba(191, 69, 115, 0.42);
+}
+
+@keyframes letterFall {
+  0% {
+    opacity: 0;
+    transform: translateY(-330px) rotate(-20deg) scale(0.7);
+  }
+  15% {
+    opacity: 1;
+  }
+  60% {
+    transform: translateY(14px) rotate(7deg) scale(1);
+  }
+  78% {
+    transform: translateY(-8px) rotate(-4deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(-2deg);
+  }
+}
+
+.drop-hint {
+  margin-top: 16px;
+  font-family: "Caveat", cursive;
+  font-size: 1.5rem;
+  color: var(--rose);
+  opacity: 0;
+  transition: opacity 0.6s;
+  font-weight: 700;
+}
+.drop-hint.show {
+  opacity: 1;
+  animation: blink 1.8s ease-in-out infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0.45;
+  }
+}
+
+/* ── THE END ─────────────────────────────────────────────── */
+.end-note {
+  display: none;
+  margin-top: 30px;
+  font-family: "Caveat", cursive;
+  font-size: 1.7rem;
+  color: var(--muted);
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+.scene.finale {
+  justify-content: center;
+  min-height: calc(100vh - 140px);
+}
+.scene.finale .drop-zone {
+  display: none;
+}
+.scene.finale .top-note {
+  display: none;
+}
+.scene.finale .end-note {
+  display: block;
+}
+.scene.finale .end-note.show {
+  opacity: 1;
+}
+
+/* ── THE LETTER (full) ───────────────────────────────────── */
+.letter-paper {
+  width: 100%;
+  position: relative;
+  background: var(--cream);
+  border-radius: 10px;
+  padding: clamp(26px, 6vw, 46px);
+  box-shadow:
+    0 20px 50px rgba(191, 69, 115, 0.22),
+    0 0 0 2px #fff inset;
+  border: 2px solid var(--line);
+  animation: letterGrow 0.9s cubic-bezier(0.2, 0.9, 0.3, 1) both;
+}
+.letter-paper::before {
+  /* pink margin line */
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: clamp(14px, 4vw, 26px);
+  width: 2px;
+  background: rgba(236, 143, 176, 0.45);
+}
+@keyframes letterGrow {
+  from {
+    opacity: 0;
+    transform: translateY(110px) scale(0.35) rotate(-6deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0);
+  }
+}
+.scene.leaving {
+  opacity: 0;
+  transition: opacity 0.7s ease;
+  pointer-events: none;
+}
+
+.paper-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding-left: 10px;
+}
+.tag {
+  background: var(--rose);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  padding: 4px 11px;
+  border-radius: 99px;
+}
+.tag-sub {
+  font-family: "Caveat", cursive;
+  font-size: 1.2rem;
+  color: var(--muted);
+}
+
+.paper-to {
+  font-family: "Caveat", cursive;
+  font-size: clamp(2.3rem, 9vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1;
+  margin: 0 0 20px 10px;
+  color: var(--ink);
+}
+
+/* ── MESSAGE (responsive: grows with any length) ─────────── */
+.card-message {
+  padding-left: 10px;
+  margin-bottom: 26px;
+}
+.card-message p {
+  font-size: clamp(1rem, 2.6vw, 1.1rem);
+  line-height: 1.85;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+.card-message p:last-child {
+  margin-bottom: 0;
+}
+
+.polaroid {
+  max-width: 300px;
+  margin: 0 auto 26px 10px;
+  padding: 10px 10px 8px;
+  border-radius: 3px;
+  transform: rotate(-2deg);
+  box-shadow: 0 8px 20px rgba(74, 39, 51, 0.2);
+}
+.polaroid img {
+  aspect-ratio: 1 / 1;
+  border-radius: 2px;
+}
+.polaroid figcaption {
+  margin-top: 8px;
+}
+.polaroid::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 80px;
+  height: 20px;
+  transform: translateX(-50%) rotate(-3deg);
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(247, 182, 200, 0.85) 0 6px,
+    rgba(255, 255, 255, 0.7) 6px 12px
+  );
+}
+
+.paper-sign {
+  font-family: "Caveat", cursive;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--ink);
+  text-align: right;
+  margin-bottom: 26px;
+}
+
+/* ── REPLY ───────────────────────────────────────────────── */
+.reply-section {
+  text-align: center;
+  padding-top: 18px;
+  border-top: 2px dashed var(--line);
+}
+.reply-prompt {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.btn-reply,
+.btn-send {
+  background: var(--rose);
+  color: #fff;
+  border: none;
+  border-radius: 99px;
+  font-family: "Nunito", sans-serif;
+  font-weight: 700;
+  font-size: 1.02rem;
+  cursor: pointer;
+  transition:
+    transform 0.15s,
+    box-shadow 0.2s,
+    background 0.2s;
+}
+.btn-reply {
+  padding: 14px 38px;
+  box-shadow: 0 8px 20px rgba(191, 69, 115, 0.35);
+}
+.btn-reply:hover,
+.btn-send:hover {
+  background: var(--rose-d);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(191, 69, 115, 0.4);
+}
+.btn-reply:active,
+.btn-send:active {
+  transform: scale(0.97);
+}
+
+/* ── MODAL ───────────────────────────────────────────────── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  padding: 20px;
+  background: rgba(74, 39, 51, 0.4);
+  backdrop-filter: blur(5px);
+  align-items: center;
+  justify-content: center;
+}
+.modal-overlay.open {
+  display: flex;
+}
+.modal-box {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  background: var(--cream);
+  border-radius: 18px;
+  border-top: 6px solid var(--sakura-m);
+  padding: clamp(24px, 6vw, 38px);
+  box-shadow: 0 26px 70px rgba(74, 39, 51, 0.3);
+  animation: pop 0.3s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+.modal-close:hover {
+  background: var(--blush);
+}
+.modal-title {
+  font-family: "Caveat", cursive;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.1;
+}
+.modal-sub {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.93rem;
+  margin: 6px 0 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+}
+.field label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.field textarea {
+  min-height: 130px;
+  resize: vertical;
+  padding: 13px;
+  font-family: "Nunito", sans-serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--ink);
+  background: #fff;
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  outline: none;
+}
+.field textarea::placeholder {
+  color: #a58392;
+}
+.field textarea:focus {
+  border-color: var(--rose);
+  box-shadow: 0 0 0 3px rgba(191, 69, 115, 0.15);
+}
+
+.btn-send {
+  width: 100%;
+  padding: 14px;
+  box-shadow: 0 6px 16px rgba(191, 69, 115, 0.3);
+}
+.btn-send:disabled {
+  background: #cdb4bd;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+.send-note {
+  text-align: center;
+  font-size: 0.88rem;
+  margin-top: 10px;
+  min-height: 18px;
+  font-weight: 600;
+}
+.send-note.error {
+  color: #b3261e;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .stage {
+    padding: 26px 14px 64px;
+  }
+  .letter {
+    width: 190px;
+    height: 118px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

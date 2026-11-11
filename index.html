@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Last Page</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Cormorant+Garamond:ital,wght@1,600;1,700&family=Nunito:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- falling sakura petals -->
+    <div class="petals" id="petals" aria-hidden="true"></div>
+
+    <main class="stage">
+      <!-- ═════════ SCENE 1 : THE DIARY ═════════ -->
+      <section class="scene" id="sceneBook">
+        <p class="top-note" id="topNote">
+          there's a diary here… tap it to open 🌸
+        </p>
+
+        <div class="book-wrap">
+          <div
+            class="book"
+            id="book"
+            role="button"
+            tabindex="0"
+            aria-label="Open the diary"
+          >
+            <!-- First inner page -->
+            <div class="page">
+              <p class="page-date">last na lagi ni</p>
+              <h2 class="page-hello">Dear Uno,</h2>
+
+              <figure class="photo paste">
+                <img
+                  src="images/meme2.gif"
+                  alt=""
+                  onerror="this.closest('.photo').classList.add('missing')"
+                />
+                <span class="ph">meme2.gif</span>
+                <figcaption>nay natagak 👇</figcaption>
+              </figure>
+
+              <p class="page-small">something slipped out of this page…</p>
+            </div>
+
+            <!-- Cover -->
+            <div class="book-cover">
+              <div class="cover-label">
+                <span class="cover-title t-a">Hopia Like It</span>
+                <span class="cover-title t-b">The End</span>
+                <span class="cover-sub">— the last chapter —</span>
+              </div>
+
+              <img
+                class="cover-sticker"
+                src="images/meme1.jpg"
+                alt=""
+                onerror="this.remove()"
+              />
+            </div>
+
+            <div class="ribbon"></div>
+          </div>
+        </div>
+
+        <!-- The letter that drops out of the diary -->
+        <div class="drop-zone" id="dropZone">
+          <div
+            class="letter"
+            id="letter"
+            role="button"
+            tabindex="0"
+            aria-label="Open the letter"
+          >
+            <span class="letter-to">To Uno</span>
+            <span class="letter-seal">🌸</span>
+          </div>
+          <p class="drop-hint" id="dropHint">a letter fell out… tap it</p>
+        </div>
+
+        <!-- Shown at the very end -->
+        <p class="end-note" id="endNote">thank you for reading ✿</p>
+      </section>
+
+      <!-- ═════════ SCENE 2 : THE LETTER ═════════ -->
+      <section class="scene hidden" id="sceneLetter">
+        <article class="letter-paper" id="letterPaper">
+          <div class="paper-top">
+            <span class="tag">Part 4</span>
+            <span class="tag-sub">last part</span>
+          </div>
+
+          <h1 class="paper-to">Dear Uno,</h1>
+
+          <div class="card-message" id="cardMessage">
+            <p>
+              Hi Uno hihi😁 promise last na lagi ni HAHA whale actually nahuman
+              na nko nig gama kaning nakita nimo karon and after sa atong chat
+              dili na unta nako ni ihatag pero naka hinumdom man gud ko sa
+              gitubag nko tung nangutana akong amigo sauna og "what if dili
+              pwede si Yzah magpadayun ka?" then mi ana ko nga "ouh siguro" so
+              karon ako lang ning ipadayun og hatag nimo then dina ko mo samok
+              nimo hihi and sayang man sad diba if dili nko ihatag
+            </p>
+            <p>
+              Anyway about sa akong gipang buhat ani is actually lisodan ko kay
+              dili gyud ko into software and daghan gyud pud og flaws ning akong
+              gihimo ron and I think makahibaw raka ani since naa namn moy
+              software design karon 2nd sem. Then tung naghimo ko ani is mo abot
+              nkog 3AM wapa natug kay naa pay gipang adjust-adjust para sad dili
+              lain tan awon haha nadamay pa nko si Dan og samok haha segi rakog
+              pangutana "lami naba tanawon?" then kung maka bantay ka dugay ko
+              mo hatag para sa next part kay kina busyhan gyud nko adto timema
+              dungan-dungan ang project samot na sa ika 3 nko nga hatag wana na
+              print gyud sorry for that😔 my false hihi pero maygani na singit
+              ra nko og himo. Btw GSP man diay ka sauna bantog ra ganahan ko
+              nimo haha plus feel nko close mo ni Princess Anne "dam-ag"
+              Enriquez huhu aylang ko isaba niya kusog raba to manlibak
+            </p>
+            <p>
+              Anyway sorry if naay mga unnecessary things nga naingon nko ron gi
+              tuyo nko na kay kalimtan sani nko nga nahitabo ni then balikan
+              rasad nko mga few months from now. AAAAAAAaaa!! basta mao nato
+              hope you like it and Goodluck and Thank You Uno🤭
+            </p>
+            <!-- kay feel nko dako man gud nig impact nko kay dugay-dugay namn gud ko niganahan nimo dugay sad kalihok haha murag tung ni add ko nimo adto nagsugod -->
+          </div>
+          <!-- ─── END OF MESSAGE AREA ─── -->
+
+          <!-- 🖼️ MEME SLOT 3  -->
+          <figure class="photo polaroid">
+            <img
+              src="images/meme3.jpg"
+              alt=""
+              onerror="this.closest('.photo').classList.add('missing')"
+            />
+            <span class="ph">meme3.jpg</span>
+            <figcaption>Nalingaw raba ka?</figcaption>
+          </figure>
+
+          <p class="paper-sign">— Chris</p>
+
+          <div class="reply-section">
+            <p class="reply-prompt">reply is unnecessary</p>
+            <button class="btn-reply" id="btnReply" type="button">
+              Write back 🌸
+            </button>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <!-- ═════════ REPLY MODAL ═════════ -->
+    <div class="modal-overlay" id="replyModal">
+      <div class="modal-box">
+        <button
+          class="modal-close"
+          id="modalClose"
+          type="button"
+          aria-label="Close"
+        >
+          ✕
+        </button>
+        <h2 class="modal-title">Write back 🌸</h2>
+        <p class="modal-sub">Sure ka?</p>
+
+        <form id="replyForm">
+          <div class="field">
+            <label for="replyMessage">Your reply</label>
+            <textarea
+              id="replyMessage"
+              rows="5"
+              placeholder="Type anything…"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="btn-send" id="btnSend">Send 💌</button>
+          <p class="send-note" id="sendNote"></p>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+      const EMAILJS_PUBLIC_KEY = "IE1GxTGccCClxyAm8";
+      const EMAILJS_SERVICE_ID = "service_866upsd";
+      const EMAILJS_TEMPLATE_ID = "template_sdvs1pk";
+      emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+    </script>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
